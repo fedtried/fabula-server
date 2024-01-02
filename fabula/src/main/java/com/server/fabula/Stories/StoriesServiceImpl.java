@@ -10,9 +10,8 @@ import java.util.Optional;
 @Service
 public class StoriesServiceImpl implements StoriesService{
 
-    private StoriesRepository storiesRepository;
+    private final StoriesRepository storiesRepository;
 
-    @Autowired
     public StoriesServiceImpl(StoriesRepository storiesRepository) {
         this.storiesRepository = storiesRepository;
     }
