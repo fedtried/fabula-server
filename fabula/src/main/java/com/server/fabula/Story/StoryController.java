@@ -15,11 +15,6 @@ public class StoryController {
     public StoryController(StoryService StoryService){
         this.StoryService = StoryService;
     }
-    @PostConstruct
-    public void loadData(){
-
-    }
-
     @GetMapping("/Story")
     public List<Story> getAllStories(){
         return StoryService.findAll();
