@@ -5,36 +5,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StoriesServiceImpl implements StoriesService{
 
-    private StoriesDAO storiesDAO;
+    private StoriesRepository storiesRepository;
 
     @Autowired
-    public StoriesServiceImpl(StoriesDAO storiesDAO) {
-        this.storiesDAO = storiesDAO;
+    public StoriesServiceImpl(StoriesRepository storiesRepository) {
+        this.storiesRepository = storiesRepository;
     }
 
     @Override
     public List<Stories> findAll() {
-        return storiesDAO.findAll();
+        return storiesRepository.findAll();
     }
 
     @Override
     public Stories findStoryById(Integer id) {
-        return storiesDAO.findStoryById(id);
+        Optional<Stories> result = storiesRepository.findById(id);
+        Stories story = null;
+        if(result.isPresent()){
+            story = result.get();
+        } else {
+            throw new RuntimeException("Couldn't find story.");
+        }
+        return story;
     }
 
-    @Transactional
     @Override
     public Stories saveStory(Stories story) {
-        return storiesDAO.saveStory(story);
+        return storiesRepository.save(story);
     }
 
-    @Transactional
     @Override
     public void deleteStoryById(Integer id) {
-        storiesDAO.deleteStoryById(id);
+        storiesRepository.deleteById(id);
     }
 }
