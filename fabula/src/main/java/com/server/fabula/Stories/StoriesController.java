@@ -9,13 +9,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class StoriesController {
-    private StoriesService storiesService;
-
-    @Autowired
-    public StoriesController(StoriesService storiesService) {
+    private final StoriesService storiesService;
+    public StoriesController(StoriesService storiesService){
         this.storiesService = storiesService;
     }
-
     @PostConstruct
     public void loadData(){
 
