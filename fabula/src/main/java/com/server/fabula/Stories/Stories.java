@@ -20,9 +20,7 @@ public class Stories {
     @Column(name = "writing")
     private String writing;
 
-    public Stories() {
-
-    }
+    public Stories() {}
 
     public Stories(String date, String quote, String writing) {
         this.date = date;

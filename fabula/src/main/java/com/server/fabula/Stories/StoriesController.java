@@ -21,11 +21,6 @@ public class StoriesController {
 
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "Hello There";
-    }
-
     @GetMapping("/stories")
     public List<Stories> getAllStories(){
         return storiesService.findAll();
