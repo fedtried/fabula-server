@@ -1,4 +1,4 @@
-package com.server.fabula.Stories;
+package com.server.fabula.Story;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Data
-public class Stories {
+public class Story {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
