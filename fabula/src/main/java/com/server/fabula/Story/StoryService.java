@@ -10,5 +10,5 @@ public interface StoryService {
 
     Story saveStory(Story story);
 
-    void deleteStoryById(Integer id);
+    Story deleteStory(Integer id);
 }
