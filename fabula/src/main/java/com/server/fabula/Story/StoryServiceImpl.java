@@ -40,4 +40,5 @@ public class StoryServiceImpl implements StoryService {
     public void deleteStoryById(Integer id) {
         storyRepository.deleteById(id);
     }
+
 }

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StoryServiceConfig {
 
-  public StoryService storiesService(StoryRepository storyRepository){
+  public StoryService storyService(StoryRepository storyRepository){
     return new StoryServiceImpl(storyRepository);
   }
 
