@@ -1,6 +1,9 @@
 package com.server.fabula.Story;
 
+import static org.springframework.http.ResponseEntity.ok;
+
 import jakarta.annotation.PostConstruct;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,48 +21,29 @@ public class StoryController {
     }
 
     @GetMapping("/Story")
-    public List<Story> getAllStory(){
+    public List<Story> getAllStories(){
         return StoryService.findAll();
     }
 
     @GetMapping("/Story/{id}")
-    public Story getStoryById(@PathVariable int id){
-        Story story = StoryService.findStoryById(id);
-        if (story == null){
-            throw new RuntimeException("Story not found!");
-        }
-        return story;
+    public ResponseEntity<Story> getStoryById(@PathVariable int id){
+        return ok(StoryService.findStoryById(id));
     }
 
     @PostMapping("/Story")
-    public Story addStory(@RequestBody Story story){
+    public ResponseEntity<Story> addStory(@RequestBody Story story){
         story.setId(0);
-        try {
-            return StoryService.saveStory(story);
-        }
-        catch(Exception e) {
-            throw new RuntimeException(e);
-        }
+        return ok(StoryService.saveStory(story));
     }
 
     @PutMapping("/Story")
-    public Story updateStory(@RequestBody Story story){
-        try {
-            return StoryService.saveStory(story);
-        }
-        catch(Exception e) {
-            throw new RuntimeException(e);
-        }
+    public ResponseEntity<Story> updateStory(@RequestBody Story story){
+        return ok(StoryService.saveStory(story));
     }
 
     @DeleteMapping("/Story/{id}")
-    public String deleteStory(@PathVariable int id) {
-        Story story = StoryService.findStoryById(id);
-        if (story == null){
-            throw new RuntimeException("Story not found!");
-        }
-        StoryService.deleteStoryById(id);
-        return "Deleted story";
+    public ResponseEntity<Story> deleteStory(@PathVariable int id) {
+        return ok(StoryService.deleteStory(id));
     }
 
 }

@@ -21,14 +21,8 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public Story findStoryById(Integer id) {
-        Optional<Story> result = storyRepository.findById(id);
-        Story story = null;
-        if(result.isPresent()){
-            story = result.get();
-        } else {
-            throw new RuntimeException("Couldn't find story.");
-        }
-        return story;
+        return storyRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Couldn't find story."));
     }
 
     @Override
@@ -37,8 +31,10 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public void deleteStoryById(Integer id) {
+    public Story deleteStory(Integer id) {
+        Story story = findStoryById(id);
         storyRepository.deleteById(id);
+        return story;
     }
 
 }
