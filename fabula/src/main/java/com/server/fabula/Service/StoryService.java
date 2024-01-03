@@ -1,4 +1,6 @@
-package com.server.fabula.Story;
+package com.server.fabula.Service;
+
+import com.server.fabula.Entity.Story;
 
 import java.util.List;
 

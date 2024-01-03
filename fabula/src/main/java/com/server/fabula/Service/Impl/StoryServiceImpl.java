@@ -1,9 +1,10 @@
-package com.server.fabula.Story;
+package com.server.fabula.Service.Impl;
 
-import org.springframework.stereotype.Service;
+import com.server.fabula.Entity.Story;
+import com.server.fabula.Repository.StoryRepository;
+import com.server.fabula.Service.StoryService;
 
 import java.util.List;
-import java.util.Optional;
 
 public class StoryServiceImpl implements StoryService {
 

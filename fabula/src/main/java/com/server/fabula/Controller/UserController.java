@@ -1,7 +1,7 @@
-package com.server.fabula.User;
+package com.server.fabula.Controller;
 
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.server.fabula.Entity.User;
+import com.server.fabula.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

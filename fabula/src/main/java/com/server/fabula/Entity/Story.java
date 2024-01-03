@@ -1,4 +1,4 @@
-package com.server.fabula.Story;
+package com.server.fabula.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

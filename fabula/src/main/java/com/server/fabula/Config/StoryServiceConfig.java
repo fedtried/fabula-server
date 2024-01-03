@@ -1,5 +1,8 @@
-package com.server.fabula.Story;
+package com.server.fabula.Config;
 
+import com.server.fabula.Repository.StoryRepository;
+import com.server.fabula.Service.StoryService;
+import com.server.fabula.Service.Impl.StoryServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
