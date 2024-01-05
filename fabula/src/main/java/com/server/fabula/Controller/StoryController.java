@@ -35,8 +35,8 @@ public class StoryController {
     }
 
     @PutMapping("/Story")
-    public ResponseEntity<Story> updateStory(@RequestBody Story story){
-        return ok(StoryService.updateStory(story));
+    public ResponseEntity<Story> updateStory(@RequestBody Story story, @RequestParam(name = "id") int id){
+        return ok(StoryService.saveStory(story,id));
     }
 
     @DeleteMapping("/Story/{id}")

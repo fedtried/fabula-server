@@ -1,5 +1,6 @@
 package com.server.fabula.Service.Impl;
 
+import com.google.common.collect.Iterables;
 import com.server.fabula.Entity.Story;
 import com.server.fabula.Entity.User;
 import com.server.fabula.Repository.StoryRepository;
@@ -33,16 +34,18 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public Story saveStory(Story story, int id) {
         User user = userService.findUserById(id);
+        story.setUser(user);
         List<Story> stories = user.getStories();
-        stories.add(story);
+        String storyId = Integer.toString(story.getId());
+        if(storyId.equals("0")){
+            stories.add(story);
+        } else {
+            int index = Iterables.indexOf(stories, s -> storyId.equals(Integer.toString(s.getId())));
+            System.out.println(index);
+            stories.set(index, story);
+        }
         user.setStories(stories);
         userService.saveUser(user);
-        story.setUser(user);
-        return storyRepository.save(story);
-    }
-
-    @Override
-    public Story updateStory(Story story) {
         return storyRepository.save(story);
     }
 
