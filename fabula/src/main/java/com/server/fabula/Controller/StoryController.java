@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class StoryController {
     private final com.server.fabula.Service.StoryService StoryService;
+
     public StoryController(StoryService StoryService){
         this.StoryService = StoryService;
     }
@@ -28,14 +29,14 @@ public class StoryController {
     }
 
     @PostMapping("/Story")
-    public ResponseEntity<Story> addStory(@RequestBody Story story){
+    public ResponseEntity<Story> addStory(@RequestBody Story story, @RequestParam(name = "id") int id){
         story.setId(0);
-        return ok(StoryService.saveStory(story));
+        return ok(StoryService.saveStory(story, id));
     }
 
     @PutMapping("/Story")
     public ResponseEntity<Story> updateStory(@RequestBody Story story){
-        return ok(StoryService.saveStory(story));
+        return ok(StoryService.updateStory(story));
     }
 
     @DeleteMapping("/Story/{id}")

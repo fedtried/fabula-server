@@ -10,7 +10,9 @@ public interface StoryService {
 
     Story findStoryById(Integer id);
 
-    Story saveStory(Story story);
+    Story saveStory(Story story, int id);
+
+    Story updateStory(Story story);
 
     Story deleteStory(Integer id);
 }
