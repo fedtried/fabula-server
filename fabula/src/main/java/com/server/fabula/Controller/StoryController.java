@@ -13,33 +13,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class StoryController {
-    private final com.server.fabula.Service.StoryService StoryService;
+    private final StoryService StoryService;
 
     public StoryController(StoryService StoryService){
         this.StoryService = StoryService;
     }
-    @GetMapping("/Story")
+    @GetMapping("/story")
     public List<Story> getAllStories(){
         return StoryService.findAll();
     }
 
-    @GetMapping("/Story/{id}")
+    @GetMapping("/story/{id}")
     public ResponseEntity<Story> getStoryById(@PathVariable int id){
         return ok(StoryService.findStoryById(id));
     }
 
-    @PostMapping("/Story")
+    @PostMapping("/story")
     public ResponseEntity<Story> addStory(@RequestBody Story story, @RequestParam(name = "id") int id){
         story.setId(0);
         return ok(StoryService.saveStory(story, id));
     }
 
-    @PutMapping("/Story")
+    @PutMapping("/story")
     public ResponseEntity<Story> updateStory(@RequestBody Story story){
         return ok(StoryService.updateStory(story));
     }
 
-    @DeleteMapping("/Story/{id}")
+    @DeleteMapping("/story/{id}")
     public ResponseEntity<Story> deleteStory(@PathVariable int id) {
         return ok(StoryService.deleteStory(id));
     }
