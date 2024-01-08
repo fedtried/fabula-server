@@ -5,6 +5,7 @@ import com.server.fabula.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -44,6 +45,11 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable int id) {
         return ok(userService.deleteUserById(id));
+    }
+
+    @GetMapping("/user/{id}/{date}")
+    public ResponseEntity<Boolean> getIfStoryWrittenToday(@PathVariable int id, @PathVariable LocalDate date){
+        return ok(userService.hasStoryForPrompt(id, date));
     }
 
 }

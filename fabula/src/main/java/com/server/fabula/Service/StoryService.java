@@ -10,7 +10,7 @@ public interface StoryService {
 
     Story findStoryById(Integer id);
 
-    Story saveStory(Story story, int id);
+    Story saveStory(Story story, int userId, int promptId);
 
     Story updateStory(Story story);
 

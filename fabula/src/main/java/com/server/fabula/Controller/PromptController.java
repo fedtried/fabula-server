@@ -6,6 +6,8 @@ import com.server.fabula.Service.PromptService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 import static org.springframework.http.ResponseEntity.ok;
 
 @CrossOrigin(origins = "*")
@@ -20,7 +22,7 @@ public class PromptController {
     }
 
     @GetMapping("/prompt/{date}")
-    public ResponseEntity<Prompt> getStoryByDate(@PathVariable String date){
+    public ResponseEntity<Prompt> getStoryByDate(@PathVariable LocalDate date){
         return ok(promptService.findStoryByDate(date));
     }
 

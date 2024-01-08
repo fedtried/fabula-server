@@ -1,8 +1,12 @@
 package com.server.fabula.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.server.fabula.DTO.PromptDTO;
+import com.server.fabula.DTO.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name="stories")
@@ -20,7 +24,7 @@ public class Story {
     private int id;
 
     @Column(name = "date")
-    private String date;
+    private LocalDate date;
 
     @Column(name = "quote")
     private String quote;
@@ -28,8 +32,13 @@ public class Story {
     @Column(name = "writing")
     private String writing;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "prompt_id")
+    @JsonIgnore
+    private Prompt prompt;
 }

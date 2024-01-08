@@ -4,6 +4,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 import com.server.fabula.Entity.Story;
 import com.server.fabula.Service.StoryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,10 +32,10 @@ public class StoryController {
     }
 
     @PostMapping("/story")
-
-    public ResponseEntity<Story> addStory(@RequestBody Story story, @RequestParam(name = "id") int id){
+    public ResponseEntity<Story> addStory(@RequestBody Story story, @RequestParam(name = "userId") int userId, @RequestParam(name = "promptId") int promptId){
         story.setId(0);
-        return ok(StoryService.saveStory(story, id));
+        Story savedStory = StoryService.saveStory(story, userId, promptId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedStory);
     }
 
     @PutMapping("/story")
