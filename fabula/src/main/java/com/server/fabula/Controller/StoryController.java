@@ -1,17 +1,19 @@
-package com.server.fabula.Story;
+package com.server.fabula.Controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-import jakarta.annotation.PostConstruct;
+import com.server.fabula.Entity.Story;
+import com.server.fabula.Service.StoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class StoryController {
-    private final StoryService StoryService;
+    private final com.server.fabula.Service.StoryService StoryService;
     public StoryController(StoryService StoryService){
         this.StoryService = StoryService;
     }
