@@ -1,14 +1,20 @@
 package com.server.fabula.Service.Impl;
 
+import com.google.common.collect.Iterables;
 import com.server.fabula.Entity.Story;
+import com.server.fabula.Entity.User;
 import com.server.fabula.Repository.StoryRepository;
 import com.server.fabula.Service.StoryService;
+import com.server.fabula.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class StoryServiceImpl implements StoryService {
 
     private final StoryRepository storyRepository;
+    @Autowired
+    private UserService userService;
 
     public StoryServiceImpl(StoryRepository storyRepository) {
         this.storyRepository = storyRepository;
@@ -26,7 +32,19 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public Story saveStory(Story story) {
+    public Story saveStory(Story story, int id) {
+        User user = userService.findUserById(id);
+        story.setUser(user);
+        List<Story> stories = user.getStories();
+        String storyId = Integer.toString(story.getId());
+        stories.add(story);
+        user.setStories(stories);
+        userService.saveUser(user);
+        return storyRepository.save(story);
+    }
+
+    @Override
+    public Story updateStory(Story story) {
         return storyRepository.save(story);
     }
 
