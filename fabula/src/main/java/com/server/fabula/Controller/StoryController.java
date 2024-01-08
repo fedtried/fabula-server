@@ -13,7 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class StoryController {
+
     private final StoryService StoryService;
+
 
     public StoryController(StoryService StoryService){
         this.StoryService = StoryService;
@@ -29,6 +31,7 @@ public class StoryController {
     }
 
     @PostMapping("/story")
+
     public ResponseEntity<Story> addStory(@RequestBody Story story, @RequestParam(name = "id") int id){
         story.setId(0);
         return ok(StoryService.saveStory(story, id));
