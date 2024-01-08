@@ -37,15 +37,14 @@ public class StoryServiceImpl implements StoryService {
         story.setUser(user);
         List<Story> stories = user.getStories();
         String storyId = Integer.toString(story.getId());
-        if(storyId.equals("0")){
-            stories.add(story);
-        } else {
-            int index = Iterables.indexOf(stories, s -> storyId.equals(Integer.toString(s.getId())));
-            System.out.println(index);
-            stories.set(index, story);
-        }
+        stories.add(story);
         user.setStories(stories);
         userService.saveUser(user);
+        return storyRepository.save(story);
+    }
+
+    @Override
+    public Story updateStory(Story story) {
         return storyRepository.save(story);
     }
 

@@ -12,5 +12,7 @@ public interface StoryService {
 
     Story saveStory(Story story, int id);
 
+    Story updateStory(Story story);
+
     Story deleteStory(Integer id);
 }
