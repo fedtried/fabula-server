@@ -18,6 +18,8 @@ public interface UserService {
 
     User deleteUserById(Integer id);
 
+    User updateUserById(Integer id, String name);
+
     UserDTO convertToDTO(User user);
 
     boolean hasStoryForPrompt(int id, LocalDate date);

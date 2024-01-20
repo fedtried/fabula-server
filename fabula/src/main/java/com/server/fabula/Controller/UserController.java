@@ -1,5 +1,6 @@
 package com.server.fabula.Controller;
 
+import com.server.fabula.DAO.Request.UpdateUserRequest;
 import com.server.fabula.Entity.User;
 import com.server.fabula.Service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @PutMapping("/user")
-    public ResponseEntity<User> updateUser(@RequestBody User user){
-        return ok(userService.saveUser(user));
+    public ResponseEntity<User> updateUser(@RequestBody UpdateUserRequest userRequest){
+        return ok(userService.updateUserById(userRequest.getId(), userRequest.getName()));
     }
 
     @DeleteMapping("/user/{id}")

@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 import static org.springframework.http.ResponseEntity.ok;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class PromptController {

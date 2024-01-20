@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -62,6 +63,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateUserById(Integer id, String name) {
+        User user = findUserById(id);
+        user.setName(name);
+        return userRepository.save(user);
+    }
+
+    @Override
     public UserDTO convertToDTO(User user) {
         return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getPassword());
     }
@@ -73,4 +81,6 @@ public class UserServiceImpl implements UserService {
         List<Story> userStories = storyRepository.findByUserAndPrompt(user, prompt);
         return !userStories.isEmpty();
     }
+
+
 }
