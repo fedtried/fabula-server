@@ -19,7 +19,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtServiceImpl implements JwtService {
 
-    @Value("replace")
+    @Value("39874982374982379847298374982379847283974982379847823974982374987234")
     private String jwtSigningKey; //Replace later
     @Override
     public String extractUserName(String token) {

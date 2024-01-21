@@ -1,5 +1,6 @@
 package com.server.fabula.Service;
 
+import com.server.fabula.DAO.Request.UpdateUserRequest;
 import com.server.fabula.DTO.UserDTO;
 import com.server.fabula.Entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +19,7 @@ public interface UserService {
 
     User deleteUserById(Integer id);
 
-    User updateUserById(Integer id, String name);
+    User updateUserById(UpdateUserRequest userRequest);
 
     UserDTO convertToDTO(User user);
 

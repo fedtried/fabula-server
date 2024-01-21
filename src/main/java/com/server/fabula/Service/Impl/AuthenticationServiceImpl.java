@@ -2,6 +2,7 @@ package com.server.fabula.Service.Impl;
 
 import com.server.fabula.DAO.Request.SigninRequest;
 import com.server.fabula.DAO.Request.SignUpRequest;
+import com.server.fabula.DAO.Request.UpdateUserRequest;
 import com.server.fabula.DAO.Response.JwtAuthenticationResponse;
 import com.server.fabula.Entity.Role;
 import com.server.fabula.Entity.User;
@@ -38,5 +39,31 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
         var jwt = jwtService.generateToken(user);
         return JwtAuthenticationResponse.builder().token(jwt).id(user.getId()).build();
+    }
+
+    @Override
+    public User updateUser(UpdateUserRequest userRequest) {
+        User user = userRepository.findById(userRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // Check if the provided current password matches the stored password
+        if (userRequest.getCurrentPassword() != null && !userRequest.getCurrentPassword().isEmpty()
+                && !passwordEncoder.matches(userRequest.getCurrentPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Invalid current password for security verification");
+        }
+
+        // Update other fields
+        if (!user.getName().equals(userRequest.getName())) {
+            user.setName(userRequest.getName());
+        }
+        if (!user.getEmail().equals(userRequest.getEmail())) {
+            user.setEmail(userRequest.getEmail());
+        }
+
+        if (userRequest.getNewPassword() != null && !userRequest.getNewPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(userRequest.getNewPassword()));
+        }
+
+        return userRepository.save(user);
     }
 }

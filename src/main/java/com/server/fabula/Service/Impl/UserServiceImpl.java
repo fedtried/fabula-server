@@ -1,5 +1,6 @@
 package com.server.fabula.Service.Impl;
 
+import com.server.fabula.DAO.Request.UpdateUserRequest;
 import com.server.fabula.DTO.UserDTO;
 import com.server.fabula.Entity.Prompt;
 import com.server.fabula.Entity.Story;
@@ -12,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class UserServiceImpl implements UserService {
 
@@ -63,9 +64,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUserById(Integer id, String name) {
-        User user = findUserById(id);
-        user.setName(name);
+    public User updateUserById(UpdateUserRequest userRequest) {
+        User user = findUserById(userRequest.getId());
+        if(!Objects.equals(user.getName(), userRequest.getName())){
+            user.setName(userRequest.getName());
+        }
+        if(!Objects.equals(user.getEmail(), userRequest.getEmail())){
+            user.setEmail(userRequest.getEmail());
+        }
         return userRepository.save(user);
     }
 
