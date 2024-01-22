@@ -1,6 +1,7 @@
 package com.server.fabula.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.server.fabula.DTO.PromptDTO;
 import com.server.fabula.DTO.UserDTO;
 import jakarta.persistence.*;
@@ -32,6 +33,9 @@ public class Story {
     @Column(name = "writing")
     private String writing;
 
+    @Column(name = "share")
+    private boolean share;
+
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -41,4 +45,9 @@ public class Story {
     @JoinColumn(name = "prompt_id")
     @JsonIgnore
     private Prompt prompt;
+
+    @JsonProperty("name")
+    public String getName() {
+        return user != null ? user.getName() : null; // Adjust the default value as needed
+    }
 }

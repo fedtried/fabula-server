@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -47,4 +49,15 @@ public class StoryController {
         return ok(StoryService.deleteStory(id));
     }
 
+    @GetMapping("/story/date/{date}")
+    public ResponseEntity<List<Story>> getStoryByDate(@PathVariable LocalDate date){
+        List<Story> allStories = StoryService.findStoryByDate(date);
+
+        // Filter stories where share is true
+        List<Story> sharedStories = allStories.stream()
+                .filter(Story::isShare)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(sharedStories);
+    }
 }

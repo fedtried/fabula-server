@@ -2,6 +2,7 @@ package com.server.fabula.Service;
 
 import com.server.fabula.Entity.Story;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface StoryService {
@@ -15,4 +16,6 @@ public interface StoryService {
     Story updateStory(Story story);
 
     Story deleteStory(Integer id);
+
+    List<Story> findStoryByDate(LocalDate date);
 }
