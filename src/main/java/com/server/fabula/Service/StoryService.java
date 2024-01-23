@@ -1,18 +1,18 @@
 package com.server.fabula.Service;
 
-import com.server.fabula.Entity.Story;
+import com.server.fabula.Entity.StoryEntity;
 
 import java.util.List;
 
 public interface StoryService {
 
-    List<Story> findAll();
+    List<StoryEntity> findAll();
 
-    Story findStoryById(Integer id);
+    StoryEntity findStoryById(Integer id);
 
-    Story saveStory(Story story, int userId, int promptId);
+    StoryEntity saveStory(StoryEntity storyEntity, int userId, int promptId);
 
-    Story updateStory(Story story);
+    StoryEntity updateStory(StoryEntity storyEntity);
 
-    Story deleteStory(Integer id);
+    StoryEntity deleteStory(Integer id);
 }

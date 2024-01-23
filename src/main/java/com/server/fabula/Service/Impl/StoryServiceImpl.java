@@ -1,63 +1,60 @@
 package com.server.fabula.Service.Impl;
 
-import com.google.common.collect.Iterables;
-import com.server.fabula.DTO.PromptDTO;
-import com.server.fabula.DTO.UserDTO;
-import com.server.fabula.Entity.Prompt;
-import com.server.fabula.Entity.Story;
-import com.server.fabula.Entity.User;
+import com.server.fabula.Model.Prompt;
+import com.server.fabula.Model.User;
+import com.server.fabula.Entity.PromptEntity;
+import com.server.fabula.Entity.StoryEntity;
+import com.server.fabula.Entity.UserEntity;
 import com.server.fabula.Repository.StoryRepository;
 import com.server.fabula.Service.PromptService;
 import com.server.fabula.Service.StoryService;
 import com.server.fabula.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class StoryServiceImpl implements StoryService {
 
     private final StoryRepository storyRepository;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PromptService promptService;
+    private final UserService userService;
+    private final PromptService promptService;
 
-    public StoryServiceImpl(StoryRepository storyRepository) {
+
+    public StoryServiceImpl(StoryRepository storyRepository, UserService userService, PromptService promptService) {
         this.storyRepository = storyRepository;
+        this.userService = userService;
+        this.promptService = promptService;
     }
 
     @Override
-    public List<Story> findAll() {
+    public List<StoryEntity> findAll() {
         return storyRepository.findAll();
     }
 
     @Override
-    public Story findStoryById(Integer id) {
+    public StoryEntity findStoryById(Integer id) {
         return storyRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Couldn't find story."));
     }
 
     @Override
-    public Story saveStory(Story story, int userId, int promptId) {
-        User user = userService.findUserById(userId);
-        UserDTO userDto = userService.convertToDTO(user);
-        Prompt prompt = promptService.findPromptById(promptId);
-        PromptDTO promptDto = promptService.convertToDTO(prompt);
-        story.setUser(user);
-        story.setPrompt(prompt);
-        return storyRepository.save(story);
+    public StoryEntity saveStory(StoryEntity storyEntity, int userId, int promptId) {
+        UserEntity userEntity = userService.findUserById(userId);
+        PromptEntity promptEntity  = promptService.findPromptById(promptId);
+        storyEntity.setUser(userEntity);
+        storyEntity.setPrompt(promptEntity);
+        return storyRepository.save(storyEntity);
     }
 
     @Override
-    public Story updateStory(Story story) {
-        return storyRepository.save(story);
+    public StoryEntity updateStory(StoryEntity storyEntity) {
+        return storyRepository.save(storyEntity);
     }
 
     @Override
-    public Story deleteStory(Integer id) {
-        Story story = findStoryById(id);
+    public StoryEntity deleteStory(Integer id) {
+        StoryEntity storyEntity = findStoryById(id);
         storyRepository.deleteById(id);
-        return story;
+        return storyEntity;
     }
 
 }

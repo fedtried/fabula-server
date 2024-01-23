@@ -1,8 +1,7 @@
 package com.server.fabula.Service.Impl;
 
-import com.server.fabula.DTO.PromptDTO;
-import com.server.fabula.Entity.Prompt;
-import com.server.fabula.Entity.Story;
+import com.server.fabula.Model.Prompt;
+import com.server.fabula.Entity.PromptEntity;
 import com.server.fabula.Repository.PromptRepository;
 import com.server.fabula.Service.PromptService;
 
@@ -17,22 +16,18 @@ public class PromptServiceImpl implements PromptService {
     }
 
     @Override
-    public Prompt findPromptById(Integer id) {
+    public PromptEntity findPromptById(Integer id) {
         return promptRepository.findById(id).orElseThrow(() -> new RuntimeException("Couldn't find user."));
     }
 
     @Override
-    public Prompt findStoryByDate(LocalDate date) {
+    public PromptEntity findStoryByDate(LocalDate date) {
         return promptRepository.findByDate(date).orElseThrow(() -> new RuntimeException("Couldn't find user."));
     }
 
     @Override
-    public Prompt savePrompt(Prompt prompt) {
-        return promptRepository.save(prompt);
+    public PromptEntity savePrompt(PromptEntity promptEntity) {
+        return promptRepository.save(promptEntity);
     }
 
-    @Override
-    public PromptDTO convertToDTO(Prompt prompt) {
-        return new PromptDTO(prompt.getId(), prompt.getDate(), prompt.getQuote());
-    }
 }

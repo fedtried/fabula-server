@@ -1,8 +1,6 @@
 package com.server.fabula.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.server.fabula.DTO.PromptDTO;
-import com.server.fabula.DTO.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +14,7 @@ import java.time.LocalDate;
 @ToString
 @Getter
 @Setter
-public class Story {
+public class StoryEntity {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
@@ -35,10 +33,10 @@ public class Story {
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "prompt_id")
     @JsonIgnore
-    private Prompt prompt;
+    private PromptEntity prompt;
 }

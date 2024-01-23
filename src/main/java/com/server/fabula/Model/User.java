@@ -1,6 +1,5 @@
-package com.server.fabula.DTO;
+package com.server.fabula.Model;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class User {
     private int id;
 
     private String name;

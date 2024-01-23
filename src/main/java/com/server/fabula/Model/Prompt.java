@@ -1,6 +1,5 @@
-package com.server.fabula.DTO;
+package com.server.fabula.Model;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PromptDTO {
+public class Prompt {
     private int id;
 
     private LocalDate date;

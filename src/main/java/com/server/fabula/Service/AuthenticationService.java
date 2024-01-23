@@ -1,15 +1,15 @@
 package com.server.fabula.Service;
 
-import com.server.fabula.DAO.Request.SigninRequest;
+import com.server.fabula.DAO.Request.SignInRequest;
 import com.server.fabula.DAO.Request.SignUpRequest;
 import com.server.fabula.DAO.Request.UpdateUserRequest;
 import com.server.fabula.DAO.Response.JwtAuthenticationResponse;
-import com.server.fabula.Entity.User;
+import com.server.fabula.Entity.UserEntity;
 
 public interface AuthenticationService {
-    JwtAuthenticationResponse signup(SignUpRequest request);
+    JwtAuthenticationResponse signUp(SignUpRequest request);
 
-    JwtAuthenticationResponse signin(SigninRequest request);
+    JwtAuthenticationResponse signIn(SignInRequest request);
 
-    User updateUser(UpdateUserRequest request);
+    UserEntity updateUser(UpdateUserRequest request);
 }
