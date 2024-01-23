@@ -1,7 +1,6 @@
 package com.server.fabula.Service.Impl;
 
-import com.server.fabula.DAO.Request.UpdateUserRequest;
-import com.server.fabula.Model.User;
+import com.server.fabula.Model.Request.UpdateUserRequest;
 import com.server.fabula.Entity.PromptEntity;
 import com.server.fabula.Entity.StoryEntity;
 import com.server.fabula.Entity.UserEntity;

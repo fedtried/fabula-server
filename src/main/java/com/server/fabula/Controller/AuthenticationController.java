@@ -1,8 +1,8 @@
 package com.server.fabula.Controller;
 
-import com.server.fabula.DAO.Request.SignInRequest;
-import com.server.fabula.DAO.Request.SignUpRequest;
-import com.server.fabula.DAO.Response.JwtAuthenticationResponse;
+import com.server.fabula.Model.Request.SignInRequest;
+import com.server.fabula.Model.Request.SignUpRequest;
+import com.server.fabula.Model.Response.JwtAuthenticationResponse;
 import com.server.fabula.Service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

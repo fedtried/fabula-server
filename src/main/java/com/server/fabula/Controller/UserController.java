@@ -1,6 +1,6 @@
 package com.server.fabula.Controller;
 
-import com.server.fabula.DAO.Request.UpdateUserRequest;
+import com.server.fabula.Model.Request.UpdateUserRequest;
 import com.server.fabula.Entity.UserEntity;
 import com.server.fabula.Service.AuthenticationService;
 import com.server.fabula.Service.UserService;

@@ -1,9 +1,9 @@
 package com.server.fabula.Service.Impl;
 
-import com.server.fabula.DAO.Request.SignInRequest;
-import com.server.fabula.DAO.Request.SignUpRequest;
-import com.server.fabula.DAO.Request.UpdateUserRequest;
-import com.server.fabula.DAO.Response.JwtAuthenticationResponse;
+import com.server.fabula.Model.Request.SignInRequest;
+import com.server.fabula.Model.Request.SignUpRequest;
+import com.server.fabula.Model.Request.UpdateUserRequest;
+import com.server.fabula.Model.Response.JwtAuthenticationResponse;
 import com.server.fabula.Entity.RoleEntity;
 import com.server.fabula.Entity.UserEntity;
 import com.server.fabula.Repository.UserRepository;

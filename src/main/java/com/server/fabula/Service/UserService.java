@@ -1,7 +1,6 @@
 package com.server.fabula.Service;
 
-import com.server.fabula.DAO.Request.UpdateUserRequest;
-import com.server.fabula.Model.User;
+import com.server.fabula.Model.Request.UpdateUserRequest;
 import com.server.fabula.Entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
