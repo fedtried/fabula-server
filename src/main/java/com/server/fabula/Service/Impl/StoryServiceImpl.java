@@ -1,20 +1,16 @@
 package com.server.fabula.Service.Impl;
 
-import com.server.fabula.Entity.PromptEntity;
 import com.server.fabula.Entity.StoryEntity;
-import com.server.fabula.Entity.UserEntity;
 import com.server.fabula.Model.Prompt;
 import com.server.fabula.Model.Request.StoryRequest;
 import com.server.fabula.Model.Story;
-import com.server.fabula.Model.User;
 import com.server.fabula.Repository.StoryRepository;
 import com.server.fabula.Service.PromptService;
 import com.server.fabula.Service.StoryService;
 import com.server.fabula.Service.UserService;
-import org.springframework.core.convert.ConversionService;
-
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.core.convert.ConversionService;
 
 public class StoryServiceImpl implements StoryService {
 
@@ -23,8 +19,11 @@ public class StoryServiceImpl implements StoryService {
     private final PromptService promptService;
     private final ConversionService conversionService;
 
-
-    public StoryServiceImpl(StoryRepository storyRepository, UserService userService, PromptService promptService, ConversionService conversionService) {
+    public StoryServiceImpl(
+            StoryRepository storyRepository,
+            UserService userService,
+            PromptService promptService,
+            ConversionService conversionService) {
         this.storyRepository = storyRepository;
         this.userService = userService;
         this.promptService = promptService;
@@ -38,8 +37,10 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public Story findStoryById(Integer id) {
-        return convertStoryEntityToStory(storyRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Couldn't find story.")));
+        return convertStoryEntityToStory(
+                storyRepository
+                        .findById(id)
+                        .orElseThrow(() -> new RuntimeException("Couldn't find story.")));
     }
 
     @Override
@@ -65,15 +66,16 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public List<Story> findStoriesByDate(LocalDate date) {
         Prompt prompt = promptService.findStoryByDate(date);
-        return storyRepository.findByPromptId(prompt.getId()).stream().map(x -> convertStoryEntityToStory(x)).toList();
+        return storyRepository.findByPromptId(prompt.getId()).stream()
+                .map(x -> convertStoryEntityToStory(x))
+                .toList();
     }
 
-
-    private Story convertStoryEntityToStory(StoryEntity entity){
+    private Story convertStoryEntityToStory(StoryEntity entity) {
         return conversionService.convert(entity, Story.class);
     }
 
-    private StoryEntity convertStoryRequestToEntity(StoryRequest request){
+    private StoryEntity convertStoryRequestToEntity(StoryRequest request) {
         return conversionService.convert(request, StoryEntity.class);
     }
 }

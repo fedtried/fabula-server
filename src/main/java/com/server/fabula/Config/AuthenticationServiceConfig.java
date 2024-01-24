@@ -19,7 +19,12 @@ public class AuthenticationServiceConfig {
             PasswordEncoder passwordEncoder,
             JwtService jwtService,
             AuthenticationManager authenticationManager,
-            ConversionService conversionService){
-        return new AuthenticationServiceImpl(userRepository, passwordEncoder, jwtService, authenticationManager, conversionService);
+            ConversionService conversionService) {
+        return new AuthenticationServiceImpl(
+                userRepository,
+                passwordEncoder,
+                jwtService,
+                authenticationManager,
+                conversionService);
     }
 }

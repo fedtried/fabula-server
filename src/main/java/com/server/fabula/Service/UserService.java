@@ -1,11 +1,9 @@
 package com.server.fabula.Service;
 
-import com.server.fabula.Model.Request.UpdateUserRequest;
 import com.server.fabula.Model.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService {
     UserDetailsService userDetailsService();

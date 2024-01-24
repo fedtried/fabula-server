@@ -10,7 +10,8 @@ import org.springframework.core.convert.ConversionService;
 @Configuration
 public class PromptServiceConfig {
     @Bean
-    public PromptService promptService(PromptRepository promptRepository, ConversionService conversionService){
+    public PromptService promptService(
+            PromptRepository promptRepository, ConversionService conversionService) {
         return new PromptServiceImpl(promptRepository, conversionService);
     }
 }

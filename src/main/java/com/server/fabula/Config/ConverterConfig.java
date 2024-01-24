@@ -3,8 +3,6 @@ package com.server.fabula.Config;
 import com.server.fabula.Conversion.*;
 import com.server.fabula.Repository.PromptRepository;
 import com.server.fabula.Repository.UserRepository;
-import com.server.fabula.Service.PromptService;
-import com.server.fabula.Service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,27 +10,28 @@ import org.springframework.context.annotation.Configuration;
 public class ConverterConfig {
 
     @Bean
-    PromptEntityToPromptConverter promptEntityToPromptConverter(){
+    PromptEntityToPromptConverter promptEntityToPromptConverter() {
         return new PromptEntityToPromptConverter();
     }
 
     @Bean
-    PromptRequestToPromptEntityConverter promptRequestToPromptEntityConverter(){
+    PromptRequestToPromptEntityConverter promptRequestToPromptEntityConverter() {
         return new PromptRequestToPromptEntityConverter();
     }
 
     @Bean
-    StoryEntityToStoryConverter storyEntityToStoryConverter(){
+    StoryEntityToStoryConverter storyEntityToStoryConverter() {
         return new StoryEntityToStoryConverter();
     }
 
     @Bean
-    StoryRequestToStoryEntityConverter storyRequestToStoryEntityConverter(UserRepository userRepository, PromptRepository promptRepository){
+    StoryRequestToStoryEntityConverter storyRequestToStoryEntityConverter(
+            UserRepository userRepository, PromptRepository promptRepository) {
         return new StoryRequestToStoryEntityConverter(userRepository, promptRepository);
     }
 
     @Bean
-    UserEntityToUserConverter userEntityToUserConverter(){
+    UserEntityToUserConverter userEntityToUserConverter() {
         return new UserEntityToUserConverter();
     }
 }

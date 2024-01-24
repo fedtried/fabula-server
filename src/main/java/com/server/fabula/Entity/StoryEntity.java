@@ -1,14 +1,12 @@
 package com.server.fabula.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Entity
-@Table(name="stories")
+@Table(name = "stories")
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +16,7 @@ import java.time.LocalDate;
 public class StoryEntity {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
 
@@ -43,5 +41,4 @@ public class StoryEntity {
     @JoinColumn(name = "prompt_id")
     @JsonIgnore
     private PromptEntity prompt;
-
 }
