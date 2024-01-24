@@ -1,15 +1,15 @@
 package com.server.fabula.Config;
 
 import com.server.fabula.Conversion.*;
+import com.server.fabula.Repository.PromptRepository;
+import com.server.fabula.Repository.UserRepository;
 import com.server.fabula.Service.PromptService;
 import com.server.fabula.Service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.ConversionService;
 
 @Configuration
 public class ConverterConfig {
-
 
     @Bean
     PromptEntityToPromptConverter promptEntityToPromptConverter(){
@@ -27,8 +27,8 @@ public class ConverterConfig {
     }
 
     @Bean
-    StoryRequestToStoryEntityConverter storyRequestToStoryEntityConverter(UserService userService, PromptService promptService){
-        return new StoryRequestToStoryEntityConverter(userService,promptService);
+    StoryRequestToStoryEntityConverter storyRequestToStoryEntityConverter(UserRepository userRepository, PromptRepository promptRepository){
+        return new StoryRequestToStoryEntityConverter(userRepository, promptRepository);
     }
 
     @Bean
