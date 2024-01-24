@@ -10,6 +10,7 @@ import com.server.fabula.Service.PromptService;
 import com.server.fabula.Service.StoryService;
 import com.server.fabula.Service.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class StoryServiceImpl implements StoryService {
@@ -55,6 +56,12 @@ public class StoryServiceImpl implements StoryService {
         StoryEntity storyEntity = findStoryById(id);
         storyRepository.deleteById(id);
         return storyEntity;
+    }
+
+    @Override
+    public List<Story> findStoryByDate(LocalDate date) {
+        Prompt prompt = promptService.findStoryByDate(date);
+        return storyRepository.findByPrompt(prompt);
     }
 
 }

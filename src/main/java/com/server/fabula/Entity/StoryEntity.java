@@ -1,6 +1,7 @@
 package com.server.fabula.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,9 @@ public class StoryEntity {
     @Column(name = "writing")
     private String writing;
 
+    @Column(name = "share")
+    private boolean share;
+
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -39,4 +43,5 @@ public class StoryEntity {
     @JoinColumn(name = "prompt_id")
     @JsonIgnore
     private PromptEntity prompt;
+
 }
