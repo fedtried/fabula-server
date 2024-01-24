@@ -1,7 +1,6 @@
 package com.server.fabula.Service.Impl;
 
 import com.server.fabula.Model.Prompt;
-import com.server.fabula.Model.User;
 import com.server.fabula.Entity.PromptEntity;
 import com.server.fabula.Entity.StoryEntity;
 import com.server.fabula.Entity.UserEntity;
@@ -59,8 +58,8 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public List<Story> findStoryByDate(LocalDate date) {
-        Prompt prompt = promptService.findStoryByDate(date);
+    public List<StoryEntity> findStoryByDate(LocalDate date) {
+        PromptEntity prompt = promptService.findStoryByDate(date);
         return storyRepository.findByPrompt(prompt);
     }
 

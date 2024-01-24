@@ -50,12 +50,12 @@ public class StoryController {
     }
 
     @GetMapping("/story/date/{date}")
-    public ResponseEntity<List<Story>> getStoryByDate(@PathVariable LocalDate date){
-        List<Story> allStories = StoryService.findStoryByDate(date);
+    public ResponseEntity<List<StoryEntity>> getStoryByDate(@PathVariable LocalDate date){
+        List<StoryEntity> allStories = StoryService.findStoryByDate(date);
 
         // Filter stories where share is true
-        List<Story> sharedStories = allStories.stream()
-                .filter(Story::isShare)
+        List<StoryEntity> sharedStories = allStories.stream()
+                .filter(StoryEntity::isShare)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(sharedStories);
