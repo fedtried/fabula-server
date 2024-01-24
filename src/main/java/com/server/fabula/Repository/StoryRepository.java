@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StoryRepository extends JpaRepository<StoryEntity, Integer> {
   Optional<StoryEntity> findById(int id);
-  List<StoryEntity> findByUserAndPrompt(UserEntity user, PromptEntity prompt);
+  List<StoryEntity> findByUserIdAndPromptId(int userId, int promptId);
 
-  List<StoryEntity> findByPrompt(PromptEntity prompt);
+  List<StoryEntity> findByPromptId(int id);
 }

@@ -1,21 +1,23 @@
 package com.server.fabula.Service;
 
 import com.server.fabula.Entity.StoryEntity;
+import com.server.fabula.Model.Request.StoryRequest;
+import com.server.fabula.Model.Story;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface StoryService {
 
-    List<StoryEntity> findAll();
+    List<Story> findAll();
 
-    StoryEntity findStoryById(Integer id);
+    Story findStoryById(Integer id);
 
-    StoryEntity saveStory(StoryEntity storyEntity, int userId, int promptId);
+    Story createStory(StoryRequest storyRequest);
 
-    StoryEntity updateStory(StoryEntity storyEntity);
+    Story updateStory(StoryEntity storyEntity);
 
-    StoryEntity deleteStory(Integer id);
+    Story deleteStory(Integer id);
 
-    List<StoryEntity> findStoryByDate(LocalDate date);
+    List<Story> findStoriesByDate(LocalDate date);
 }

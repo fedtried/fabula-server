@@ -1,7 +1,7 @@
 package com.server.fabula.Controller;
 
 import com.server.fabula.Model.Request.UpdateUserRequest;
-import com.server.fabula.Entity.UserEntity;
+import com.server.fabula.Model.User;
 import com.server.fabula.Service.AuthenticationService;
 import com.server.fabula.Service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -25,28 +25,22 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public List<UserEntity> getAllUsers(){
+    public List<User> getAllUsers(){
         return userService.findAll();
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<UserEntity> getUserById(@PathVariable int id){
+    public ResponseEntity<User> getUserById(@PathVariable int id){
         return ok(userService.findUserById(id));
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity user){
-        user.setId(0);
-        return ok(userService.saveUser(user));
-    }
-
     @PutMapping("/user")
-    public ResponseEntity<UserEntity> updateUser(@RequestBody UpdateUserRequest userRequest){
+    public ResponseEntity<User> updateUser(@RequestBody UpdateUserRequest userRequest){
         return ok(authService.updateUser(userRequest));
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<UserEntity> deleteUser(@PathVariable int id) {
+    public ResponseEntity<User> deleteUser(@PathVariable int id) {
         return ok(userService.deleteUserById(id));
     }
 

@@ -8,6 +8,6 @@ public class UserEntityToUserConverter implements Converter<UserEntity, User> {
 
     @Override
     public User convert(UserEntity source) {
-        return new User(source.getId(), source.getName(), source.getEmail(), source.getPassword());
+        return new User(source.getId(), source.getName(), source.getEmail());
     }
 }

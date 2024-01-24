@@ -32,7 +32,7 @@ public class StoryEntity {
     private String writing;
 
     @Column(name = "share")
-    private boolean share;
+    private Boolean share;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")

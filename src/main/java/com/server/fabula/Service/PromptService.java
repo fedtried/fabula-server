@@ -2,15 +2,16 @@ package com.server.fabula.Service;
 
 import com.server.fabula.Model.Prompt;
 import com.server.fabula.Entity.PromptEntity;
+import com.server.fabula.Model.Request.PromptRequest;
 
 import java.time.LocalDate;
 
 public interface PromptService {
 
-    PromptEntity findPromptById(Integer id);
+    Prompt findPromptById(Integer id);
 
-    PromptEntity findStoryByDate(LocalDate date);
+    Prompt findStoryByDate(LocalDate date);
 
-    PromptEntity savePrompt(PromptEntity promptEntity);
+    Prompt savePrompt(PromptRequest promptRequest);
 
 }

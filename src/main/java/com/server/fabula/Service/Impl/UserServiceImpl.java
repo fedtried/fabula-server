@@ -1,13 +1,17 @@
 package com.server.fabula.Service.Impl;
 
+import com.server.fabula.Model.Prompt;
 import com.server.fabula.Model.Request.UpdateUserRequest;
 import com.server.fabula.Entity.PromptEntity;
 import com.server.fabula.Entity.StoryEntity;
 import com.server.fabula.Entity.UserEntity;
+import com.server.fabula.Model.User;
 import com.server.fabula.Repository.StoryRepository;
 import com.server.fabula.Repository.UserRepository;
+import com.server.fabula.Service.AuthenticationService;
 import com.server.fabula.Service.PromptService;
 import com.server.fabula.Service.UserService;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,11 +25,14 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final StoryRepository storyRepository;
     private final PromptService promptService;
+    private final ConversionService conversionService;
 
-    public UserServiceImpl(UserRepository userRepository, StoryRepository storyRepository, PromptService promptService) {
+
+    public UserServiceImpl(UserRepository userRepository, StoryRepository storyRepository, PromptService promptService, ConversionService conversionService) {
         this.userRepository = userRepository;
         this.storyRepository = storyRepository;
         this.promptService = promptService;
+        this.conversionService = conversionService;
     }
 
     @Override
@@ -40,45 +47,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserEntity> findAll() {
-        return userRepository.findAll();
+    public List<User> findAll() {
+        return userRepository.findAll().stream().map(x -> conversionService.convert(x, User.class)).toList();
     }
 
     @Override
-    public UserEntity findUserById(Integer id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Couldn't find user."));
+    public User findUserById(Integer id) {
+       UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Couldn't find user."));
+       return convertUserEntityToUser(userEntity);
     }
 
     @Override
-    public UserEntity saveUser(UserEntity user) {
-        return userRepository.save(user);
-    }
-
-    @Override
-    public UserEntity deleteUserById(Integer id) {
-        UserEntity user = findUserById(id);
+    public User deleteUserById(Integer id) {
+        User user = findUserById(id);
         userRepository.deleteById(id);
         return user;
     }
 
     @Override
-    public UserEntity updateUserById(UpdateUserRequest userRequest) {
-        UserEntity user = findUserById(userRequest.getId());
-        if(!Objects.equals(user.getName(), userRequest.getName())){
-            user.setName(userRequest.getName());
-        }
-        if(!Objects.equals(user.getEmail(), userRequest.getEmail())){
-            user.setEmail(userRequest.getEmail());
-        }
-        return userRepository.save(user);
-    }
-
-    @Override
     public boolean hasStoryForPrompt(int id, LocalDate date) {
         UserEntity user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Couldn't find user."));
-        PromptEntity promptEntity = promptService.findStoryByDate(date);
-        List<StoryEntity> userStories = storyRepository.findByUserAndPrompt(user, promptEntity);
+        Prompt prompt = promptService.findStoryByDate(date);
+        List<StoryEntity> userStories = storyRepository.findByUserIdAndPromptId(user.getId(), prompt.getId());
         return !userStories.isEmpty();
+    }
+
+    private User convertUserEntityToUser(UserEntity entity){
+        return conversionService.convert(entity, User.class);
     }
 
 

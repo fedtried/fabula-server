@@ -6,6 +6,7 @@ import com.server.fabula.Service.Impl.AuthenticationServiceImpl;
 import com.server.fabula.Service.JwtService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,7 +18,8 @@ public class AuthenticationServiceConfig {
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
             JwtService jwtService,
-            AuthenticationManager authenticationManager ){
-        return new AuthenticationServiceImpl(userRepository, passwordEncoder, jwtService, authenticationManager);
+            AuthenticationManager authenticationManager,
+            ConversionService conversionService){
+        return new AuthenticationServiceImpl(userRepository, passwordEncoder, jwtService, authenticationManager, conversionService);
     }
 }

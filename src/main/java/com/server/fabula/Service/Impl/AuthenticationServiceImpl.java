@@ -6,20 +6,31 @@ import com.server.fabula.Model.Request.UpdateUserRequest;
 import com.server.fabula.Model.Response.JwtAuthenticationResponse;
 import com.server.fabula.Entity.RoleEntity;
 import com.server.fabula.Entity.UserEntity;
+import com.server.fabula.Model.User;
 import com.server.fabula.Repository.UserRepository;
 import com.server.fabula.Service.AuthenticationService;
 import com.server.fabula.Service.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final ConversionService conversionService;
+
+    public AuthenticationServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager, ConversionService conversionService){
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+        this.conversionService = conversionService;
+
+    }
     @Override
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
         var user = UserEntity.builder().name(request.getName())
@@ -41,13 +52,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public UserEntity updateUser(UpdateUserRequest userRequest) {
+    public User updateUser(UpdateUserRequest userRequest) {
         UserEntity user = userRepository.findById(userRequest.getId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         // Check if the provided current password matches the stored password
         if (userRequest.getCurrentPassword() != null && !userRequest.getCurrentPassword().isEmpty()
-                && !passwordEncoder.matches(userRequest.getCurrentPassword(), user.getPassword())) {
+                && !passwordEncoder.matches(userRequest.getCurrentPassword(), userRequest.getNewPassword())) {
             throw new IllegalArgumentException("Invalid current password for security verification");
         }
 
@@ -59,10 +70,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             user.setEmail(userRequest.getEmail());
         }
 
-        if (userRequest.getNewPassword() != null && !userRequest.getNewPassword().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(userRequest.getNewPassword()));
-        }
+        user.setPassword(passwordEncoder.encode(userRequest.getNewPassword()));
 
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        return conversionService.convert(user, User.class);
     }
 }

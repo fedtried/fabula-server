@@ -9,8 +9,10 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Prompt {
+public class Story {
     private int id;
     private LocalDate date;
     private String quote;
+    private String writing;
+    private Boolean share;
 }
