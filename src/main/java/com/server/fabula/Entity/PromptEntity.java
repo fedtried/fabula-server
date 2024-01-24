@@ -1,7 +1,6 @@
 package com.server.fabula.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
-public class Prompt {
+public class PromptEntity {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column
@@ -34,5 +33,5 @@ public class Prompt {
 
     @OneToMany(mappedBy = "prompt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("prompt")
-    private List<Story> stories;
+    private List<StoryEntity> stories;
 }

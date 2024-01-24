@@ -1,15 +1,19 @@
-package com.server.fabula.DAO.Response;
+package com.server.fabula.Model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtAuthenticationResponse {
-    private String token;
+public class User {
     private int id;
+
+    private String name;
+
+    private String email;
+
+    private String password;
+
 }

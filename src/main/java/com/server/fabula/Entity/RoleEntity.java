@@ -1,6 +1,6 @@
 package com.server.fabula.Entity;
 
-public enum Role {
+public enum RoleEntity {
     USER,
     ADMIN
 }

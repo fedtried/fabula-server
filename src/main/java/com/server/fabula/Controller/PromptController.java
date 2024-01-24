@@ -1,7 +1,6 @@
 package com.server.fabula.Controller;
 
-import com.server.fabula.Entity.Prompt;
-import com.server.fabula.Entity.Story;
+import com.server.fabula.Entity.PromptEntity;
 import com.server.fabula.Service.PromptService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +20,12 @@ public class PromptController {
     }
 
     @GetMapping("/prompt/{date}")
-    public ResponseEntity<Prompt> getStoryByDate(@PathVariable LocalDate date){
+    public ResponseEntity<PromptEntity> getStoryByDate(@PathVariable LocalDate date){
         return ok(promptService.findStoryByDate(date));
     }
 
     @PostMapping("/prompt")
-    public ResponseEntity<Prompt> savePrompt(@RequestBody Prompt prompt){
-        return ok(promptService.savePrompt(prompt));
+    public ResponseEntity<PromptEntity> savePrompt(@RequestBody PromptEntity promptEntity){
+        return ok(promptService.savePrompt(promptEntity));
     }
 }
