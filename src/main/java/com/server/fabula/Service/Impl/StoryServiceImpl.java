@@ -12,6 +12,7 @@ import com.server.fabula.Service.StoryService;
 import com.server.fabula.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class StoryServiceImpl implements StoryService {
@@ -58,6 +59,12 @@ public class StoryServiceImpl implements StoryService {
         Story story = findStoryById(id);
         storyRepository.deleteById(id);
         return story;
+    }
+
+    @Override
+    public List<Story> findStoryByDate(LocalDate date) {
+        Prompt prompt = promptService.findStoryByDate(date);
+        return storyRepository.findByPrompt(prompt);
     }
 
 }

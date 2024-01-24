@@ -28,6 +28,10 @@ public class Prompt {
     @Column(name = "quote")
     private String quote;
 
+    @Column(name = "mode")
+    @Enumerated(EnumType.STRING)
+    private Mode mode;
+
     @OneToMany(mappedBy = "prompt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("prompt")
     private List<Story> stories;
