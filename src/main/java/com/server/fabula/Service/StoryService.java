@@ -19,4 +19,7 @@ public interface StoryService {
     Story deleteStory(Integer id);
 
     List<Story> findStoriesByDate(LocalDate date);
+
+    List<Story> findStoriesByUserId(int id);
+
 }

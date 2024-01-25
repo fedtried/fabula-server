@@ -4,6 +4,7 @@ import com.server.fabula.Entity.StoryEntity;
 import com.server.fabula.Model.Prompt;
 import com.server.fabula.Model.Request.StoryRequest;
 import com.server.fabula.Model.Story;
+import com.server.fabula.Model.User;
 import com.server.fabula.Repository.StoryRepository;
 import com.server.fabula.Service.PromptService;
 import com.server.fabula.Service.StoryService;
@@ -67,6 +68,14 @@ public class StoryServiceImpl implements StoryService {
     public List<Story> findStoriesByDate(LocalDate date) {
         Prompt prompt = promptService.findStoryByDate(date);
         return storyRepository.findByPromptId(prompt.getId()).stream()
+                .map(x -> convertStoryEntityToStory(x))
+                .toList();
+    }
+
+    @Override
+    public List<Story> findStoriesByUserId(int id) {
+        User user = userService.findUserById(id);
+        return storyRepository.findByUserName(user.getName()).stream()
                 .map(x -> convertStoryEntityToStory(x))
                 .toList();
     }

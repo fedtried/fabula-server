@@ -11,4 +11,6 @@ public interface StoryRepository extends JpaRepository<StoryEntity, Integer> {
     List<StoryEntity> findByUserIdAndPromptId(int userId, int promptId);
 
     List<StoryEntity> findByPromptId(int id);
+
+    List<StoryEntity> findByUserName(String name);
 }

@@ -14,4 +14,5 @@ public class Story {
     private String quote;
     private String writing;
     private Boolean share;
+    private String name;
 }

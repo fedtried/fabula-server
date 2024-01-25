@@ -13,6 +13,7 @@ public class StoryEntityToStoryConverter implements Converter<StoryEntity, Story
                 source.getDate(),
                 source.getQuote(),
                 source.getWriting(),
-                source.getShare());
+                source.getShare(),
+                source.getUser().getName());
     }
 }

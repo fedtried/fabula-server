@@ -55,4 +55,12 @@ public class StoryController {
         // Filter stories where share is true
         return ResponseEntity.ok(allStories.stream().filter(Story::getShare).toList());
     }
+
+    @GetMapping("/story/user/{id}")
+    public ResponseEntity<List<Story>> getStoryByUserId(@PathVariable int id) {
+        List<Story> allStories = StoryService.findStoriesByUserId(id);
+
+        // Filter stories where share is true
+        return ResponseEntity.ok(allStories.stream().toList());
+    }
 }

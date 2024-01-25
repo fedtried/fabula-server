@@ -73,7 +73,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (userRequest.getCurrentPassword() != null
                 && !userRequest.getCurrentPassword().isEmpty()
                 && !passwordEncoder.matches(
-                        userRequest.getCurrentPassword(), userRequest.getNewPassword())) {
+                        userRequest.getCurrentPassword(), user.getPassword())) {
             throw new IllegalArgumentException(
                     "Invalid current password for security verification");
         }
@@ -86,7 +86,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             user.setEmail(userRequest.getEmail());
         }
 
-        user.setPassword(passwordEncoder.encode(userRequest.getNewPassword()));
+        if (userRequest.getNewPassword() != null && !userRequest.getNewPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(userRequest.getNewPassword()));
+        }
 
         userRepository.save(user);
 
