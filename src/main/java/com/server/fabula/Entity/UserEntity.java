@@ -1,6 +1,7 @@
 package com.server.fabula.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.server.fabula.Model.Role;
 import jakarta.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -34,11 +35,11 @@ public class UserEntity implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private RoleEntity roleEntity;
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(roleEntity.name()));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

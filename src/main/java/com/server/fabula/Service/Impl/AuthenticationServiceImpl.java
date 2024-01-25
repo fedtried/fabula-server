@@ -1,11 +1,11 @@
 package com.server.fabula.Service.Impl;
 
-import com.server.fabula.Entity.RoleEntity;
 import com.server.fabula.Entity.UserEntity;
 import com.server.fabula.Model.Request.SignInRequest;
 import com.server.fabula.Model.Request.SignUpRequest;
 import com.server.fabula.Model.Request.UpdateUserRequest;
 import com.server.fabula.Model.Response.JwtAuthenticationResponse;
+import com.server.fabula.Model.Role;
 import com.server.fabula.Model.User;
 import com.server.fabula.Repository.UserRepository;
 import com.server.fabula.Service.AuthenticationService;
@@ -42,7 +42,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         .name(request.getName())
                         .email(request.getEmail())
                         .password(passwordEncoder.encode(request.getPassword()))
-                        .roleEntity(RoleEntity.USER)
+                        .role(Role.USER)
                         .build();
         userRepository.save(user);
         var jwt = jwtService.generateToken(user);
