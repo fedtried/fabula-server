@@ -25,6 +25,7 @@ public class StoryRequestToStoryEntityConverter implements Converter<StoryReques
         storyEntity.setDate(source.getDate());
         storyEntity.setShare(source.getShare());
         storyEntity.setQuote(source.getQuote());
+        storyEntity.setWriting(source.getWriting());
 
         UserEntity userEntity = userRepository.findById(source.getUserId()).orElseThrow();
         PromptEntity promptEntity = promptRepository.findById(source.getPromptId()).orElseThrow();
