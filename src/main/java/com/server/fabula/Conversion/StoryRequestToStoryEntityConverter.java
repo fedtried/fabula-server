@@ -31,7 +31,6 @@ public class StoryRequestToStoryEntityConverter implements Converter<StoryReques
         storyEntity.setUser(userEntity);
         storyEntity.setPrompt(promptEntity);
 
-        // TODO need to add user and many to many shit here;
         return storyEntity;
     }
 }
