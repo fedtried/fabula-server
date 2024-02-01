@@ -1,4 +1,4 @@
-package com.server.fabula.DAO.Request;
+package com.server.fabula.Model.Request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateUserRequest {
-
-    private Integer id;
+public class SignUpRequest {
     private String name;
     private String email;
-    private String currentPassword;
-    private String newPassword;
+    private String password;
 }

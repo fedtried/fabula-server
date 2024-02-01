@@ -1,12 +1,9 @@
 package com.server.fabula.Service;
 
-import com.server.fabula.DAO.Request.UpdateUserRequest;
-import com.server.fabula.DTO.UserDTO;
-import com.server.fabula.Entity.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-
+import com.server.fabula.Model.User;
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService {
     UserDetailsService userDetailsService();
@@ -15,13 +12,7 @@ public interface UserService {
 
     User findUserById(Integer id);
 
-    User saveUser(User user);
-
     User deleteUserById(Integer id);
-
-    User updateUserById(UpdateUserRequest userRequest);
-
-    UserDTO convertToDTO(User user);
 
     boolean hasStoryForPrompt(int id, LocalDate date);
 }

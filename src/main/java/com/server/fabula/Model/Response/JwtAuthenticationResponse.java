@@ -1,4 +1,4 @@
-package com.server.fabula.DAO.Response;
+package com.server.fabula.Model.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

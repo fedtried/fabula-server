@@ -1,12 +1,11 @@
 package com.server.fabula.Repository;
 
-import com.server.fabula.Entity.Prompt;
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import com.server.fabula.Entity.PromptEntity;
 import java.time.LocalDate;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PromptRepository extends JpaRepository<Prompt, Integer> {
+public interface PromptRepository extends JpaRepository<PromptEntity, Integer> {
 
-    Optional<Prompt> findByDate(LocalDate date);
+    Optional<PromptEntity> findByDate(LocalDate date);
 }

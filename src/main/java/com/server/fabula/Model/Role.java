@@ -1,4 +1,4 @@
-package com.server.fabula.Entity;
+package com.server.fabula.Model;
 
 public enum Role {
     USER,

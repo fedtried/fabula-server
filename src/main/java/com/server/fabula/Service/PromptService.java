@@ -1,9 +1,7 @@
 package com.server.fabula.Service;
 
-import com.server.fabula.DTO.PromptDTO;
-import com.server.fabula.Entity.Prompt;
-import com.server.fabula.Entity.Story;
-
+import com.server.fabula.Model.Prompt;
+import com.server.fabula.Model.Request.PromptRequest;
 import java.time.LocalDate;
 
 public interface PromptService {
@@ -12,7 +10,5 @@ public interface PromptService {
 
     Prompt findStoryByDate(LocalDate date);
 
-    Prompt savePrompt(Prompt prompt);
-
-    PromptDTO convertToDTO(Prompt prompt);
+    Prompt savePrompt(PromptRequest promptRequest);
 }
